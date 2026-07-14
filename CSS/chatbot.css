@@ -1,0 +1,630 @@
+/* ==========================================================================
+   ESTILIZAÇÃO DO CHATBOT CONVERSACIONAL — LBM LAW
+   Este arquivo contém todas as regras visuais da interface do chat:
+   - Sobreposição de tela inteira (overlay)
+   - Janela de conversação centralizada e responsiva
+   - Balões de mensagens dinâmicas com efeito de surgimento
+   - Indicador de digitação animado
+   - Layouts de opções, inputs com máscara e botões de chamada final
+   ========================================================================== */
+
+/* Container de sobreposição geral que cobre toda a tela */
+.chat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-azul-deep, #151D28);
+    z-index: 99999; /* Sobrepõe absolutamente tudo */
+    display: none; /* Inicializado como oculto e controlado por JS */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+}
+
+/* Quando ativo, exibe em flex e aplica opacidade total */
+.chat-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Estrutura interna principal da janela de chat */
+.chat-window {
+    width: 100%;
+    max-width: 650px;
+    height: 100%;
+    background-color: var(--cor-azul-escuro, #1F2A39);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--sombra-forte, 0 20px 40px rgba(0, 0, 0, 0.4));
+    overflow: hidden;
+}
+
+/* Em telas maiores de desktop, aplica bordas arredondadas e limita a altura */
+@media (min-width: 768px) {
+    .chat-window {
+        height: 90vh;
+        max-height: 800px;
+        border-radius: var(--radius-lg, 10px);
+        border: 1px solid rgba(204, 166, 80, 0.2); /* Borda fina dourada */
+    }
+}
+
+/* Cabeçalho do Chat — Apresenta a atendente e o status */
+.chat-header {
+    background-color: rgba(21, 29, 40, 0.95);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(204, 166, 80, 0.15);
+    z-index: 10;
+}
+
+/* Foto de perfil/Avatar da atendente Ana */
+.chat-avatar-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--cor-dourado, #CCA650);
+    background-color: var(--cor-azul-escuro, #1F2A39);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Indicador de status online (pontinho verde piscante) */
+.chat-status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--cor-whats-verde, #25D366);
+    border-radius: 50%;
+    border: 2px solid var(--cor-azul-deep, #151D28);
+    animation: pulse-verde 2s infinite;
+}
+
+@keyframes pulse-verde {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+/* Textos informativos do cabeçalho */
+.chat-header-info {
+    flex-grow: 1;
+}
+
+.chat-header-name {
+    color: var(--cor-branco, #FFFFFF);
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.chat-header-subtitle {
+    color: var(--cor-texto-suave, #607D8B);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.chat-header-subtitle::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--cor-whats-verde, #25D366);
+    border-radius: 50%;
+}
+
+/* Área da barra de progresso no topo do chat */
+.chat-progress-container {
+    width: 100%;
+    background-color: rgba(21, 29, 40, 0.5);
+    height: 6px;
+    position: relative;
+}
+
+.chat-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cor-dourado, #CCA650), var(--cor-dourado-escuro, #92732C));
+    width: 0%; /* JS atualizará dinamicamente */
+    transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.chat-progress-text {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 0.75rem;
+    color: var(--cor-dourado, #CCA650);
+    font-weight: 500;
+}
+
+/* Área de mensagens rolável */
+.chat-messages-area {
+    flex-grow: 1;
+    padding: 25px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth;
+    background-color: rgba(31, 42, 57, 0.3);
+}
+
+/* Esconde a barra de rolagem nativa para melhor visual */
+.chat-messages-area::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-messages-area::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+.chat-messages-area::-webkit-scrollbar-thumb {
+    background: rgba(204, 166, 80, 0.2);
+    border-radius: 3px;
+}
+
+/* Estrutura de balão de mensagem */
+.chat-message-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 5px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: slide-mensagem 0.35s forwards cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes slide-mensagem {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alinhamentos das mensagens (Esquerda = Bot, Direita = Lead) */
+.chat-message-row.bot {
+    justify-content: flex-start;
+}
+
+.chat-message-row.user {
+    justify-content: flex-end;
+}
+
+/* Corpo do Balão */
+.chat-bubble {
+    max-width: 85%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    position: relative;
+    word-wrap: break-word;
+}
+
+/* Estilo da mensagem da Ana (Bot) */
+.chat-message-row.bot .chat-bubble {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--cor-branco, #FFFFFF);
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Estilo da mensagem do Lead (User) */
+.chat-message-row.user .chat-bubble {
+    background: linear-gradient(133deg, var(--cor-dourado, #CCA650) 0%, var(--cor-dourado-escuro, #92732C) 100%);
+    color: var(--cor-branco, #FFFFFF);
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Indicador de Digitação da Ana */
+.typing-indicator-bubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 14px 20px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    width: fit-content;
+}
+
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--cor-branco, #FFFFFF);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: bounce-typing 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce-typing {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* Painel inferior de interação (onde aparecem botões de opções ou inputs) */
+.chat-input-panel {
+    background-color: rgba(21, 29, 40, 0.95);
+    border-top: 1px solid rgba(204, 166, 80, 0.15);
+    padding: 20px;
+    z-index: 10;
+}
+
+/* Contêiner de botões de opções de múltipla escolha */
+.chat-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Botões de opção conversacionais */
+.chat-option-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md, 5px);
+    color: var(--cor-branco, #FFFFFF);
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.chat-option-btn:hover {
+    background-color: rgba(204, 166, 80, 0.08);
+    border-color: var(--cor-dourado, #CCA650);
+    transform: translateX(3px);
+}
+
+.chat-option-btn::after {
+    content: '➔';
+    font-size: 0.85rem;
+    color: var(--cor-dourado, #CCA650);
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.chat-option-btn:hover::after {
+    transform: translateX(3px);
+    opacity: 1;
+}
+
+/* Grid de Doenças para o Passo N3 (Layout compacto rolante de seleção) */
+.chat-diseases-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+@media (min-width: 480px) {
+    .chat-diseases-grid {
+        grid-template-columns: 1fr 1fr; /* Duas colunas em telas maiores */
+    }
+}
+
+.chat-diseases-grid::-webkit-scrollbar {
+    width: 4px;
+}
+.chat-diseases-grid::-webkit-scrollbar-thumb {
+    background: rgba(204, 166, 80, 0.3);
+    border-radius: 2px;
+}
+
+/* Botões do grid de doenças */
+.chat-disease-option {
+    padding: 12px 14px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    color: var(--cor-branco, #FFFFFF);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.chat-disease-option:hover {
+    background-color: rgba(204, 166, 80, 0.07);
+    border-color: var(--cor-dourado, #CCA650);
+}
+
+/* Campos de entrada de formulário (Inputs) */
+.chat-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.chat-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.chat-text-input {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md, 5px);
+    color: var(--cor-branco, #FFFFFF);
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.chat-text-input:focus {
+    border-color: var(--cor-dourado, #CCA650);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 10px rgba(204, 166, 80, 0.15);
+}
+
+/* Botão de envio de dados nos inputs */
+.chat-submit-btn {
+    width: 100%;
+    padding: 15px 20px;
+    background: linear-gradient(133deg, var(--cor-dourado, #CCA650) 0%, var(--cor-dourado-escuro, #92732C) 100%);
+    color: var(--cor-branco, #FFFFFF);
+    border: none;
+    border-radius: var(--radius-md, 5px);
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.chat-submit-btn:hover {
+    box-shadow: 0 4px 15px rgba(204, 166, 80, 0.3);
+    transform: translateY(-1px);
+}
+
+.chat-submit-btn:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Botões auxiliares de pular/opcional */
+.chat-btn-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.chat-skip-btn {
+    flex-grow: 1;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-md, 5px);
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chat-skip-btn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: var(--cor-branco, #FFFFFF);
+}
+
+/* Mensagem de erro de validação (abaixo do input) */
+.chat-input-error-msg {
+    color: #FF5252;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-top: -5px;
+    display: none;
+}
+
+/* Rodapé de privacidade de LGPD nos inputs de contato */
+.chat-lgpd-disclaimer {
+    font-size: 0.72rem;
+    color: var(--cor-texto-suave, #607D8B);
+    line-height: 1.35;
+    margin-top: 5px;
+}
+
+.chat-lgpd-disclaimer a {
+    color: var(--cor-dourado, #CCA650);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   TELA FINAL DE SUCESSO / ENCERRAMENTO (N11 E ROTAS ALTERNATIVAS)
+   ========================================================================== */
+.chat-final-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    padding: 15px 10px;
+    animation: fade-in 0.5s ease forwards;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.chat-final-icon {
+    font-size: 3rem;
+    animation: bounce-sucesso 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes bounce-sucesso {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.chat-final-title {
+    color: var(--cor-branco, #FFFFFF);
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.chat-final-text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Caixa de resumo da simulação na tela de fechamento */
+.chat-summary-box {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(204, 166, 80, 0.15);
+    border-radius: 6px;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin: 5px 0;
+}
+
+.chat-summary-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cor-dourado, #CCA650);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 5px;
+}
+
+.chat-summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.chat-summary-row.highlight {
+    color: var(--cor-dourado, #CCA650);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 8px;
+    margin-top: 3px;
+}
+
+/* Fileira de botões finais de Handoff */
+.chat-final-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Botão do WhatsApp principal na tela final */
+.chat-final-btn-whatsapp {
+    width: 100%;
+    padding: 16px 24px;
+    background: linear-gradient(133deg, var(--cor-whats-gradiente-inicio, #50CC70) 0%, var(--cor-whats-gradiente-fim, #0D7412) 100%);
+    color: var(--cor-branco, #FFFFFF);
+    border: none;
+    border-radius: var(--radius-md, 5px);
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+}
+
+.chat-final-btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.chat-final-btn-whatsapp svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Botão Secundário para abrir a Landing Page */
+.chat-final-btn-lp {
+    width: 100%;
+    padding: 15px 24px;
+    background-color: transparent;
+    border: 1px solid var(--cor-dourado, #CCA650);
+    color: var(--cor-dourado, #CCA650);
+    border-radius: var(--radius-md, 5px);
+    font-family: var(--fonte-geral, 'Montserrat', sans-serif);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chat-final-btn-lp:hover {
+    background-color: var(--cor-dourado, #CCA650);
+    color: var(--cor-branco, #FFFFFF);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(204, 166, 80, 0.25);
+}
+
+/* Rodapé final regulamentar da OAB na tela de encerramento */
+.chat-final-footer {
+    font-size: 0.72rem;
+    color: var(--cor-texto-suave, #607D8B);
+    margin-top: 10px;
+}

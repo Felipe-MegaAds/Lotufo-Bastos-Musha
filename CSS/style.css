@@ -1,0 +1,1568 @@
+/* ==========================================================================
+   DESIGN SYSTEM & ESTILIZAÇÃO GERAL
+   Escritório: Lotufo Advocacia
+   Nicho: Direito Previdenciário (Isenção de Imposto de Renda)
+   Paleta: Azul Escuro (60%), Dourado Nobre (10%), Branco/Gelo (30%)
+   ========================================================================== */
+
+/* Importação das fontes do Google Fonts:
+   - Cinzel: Usada para títulos de altíssimo impacto (inspiração clássica/romana).
+   - Crimson Text: Usada para títulos de seções e cards de especialidades (serifa tradicional).
+   - Montserrat: Usada para menus de navegação, textos em geral e subtítulos (limpa e moderna).
+   - Poppins: Usada para disclaimers e notas regulamentares no rodapé. */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&family=Poppins:wght@200;300;400;500&display=swap');
+
+/* Definição das variáveis globais de design para reutilização */
+:root {
+    /* Paleta de Cores Clássica e Elegante (Inspirada no modelo LBM Law) */
+    --cor-azul-escuro: #1F2A39;       /* Cor base escura (azul-acinzentado nobre) */
+    --cor-azul-deep: #151D28;         /* Variante mais escura para contrastes e rodapés */
+    --cor-azul-claro: #E3F2FF;        /* Variante clara para contrastar em fundos escuros */
+    --cor-dourado: #CCA650;           /* Dourado nobre (fosco e sofisticado) */
+    --cor-dourado-escuro: #92732C;    /* Dourado escuro para gradientes de botões */
+    --cor-branco: #FFFFFF;            /* Branco puro para áreas limpas e textos claros */
+    --cor-gelo: #F7F7F7;              /* Cinza gelo suave para fundos alternados */
+    
+    /* Cores do WhatsApp */
+    --cor-whats-verde: #25D366;       /* Verde oficial do WhatsApp */
+    --cor-whats-gradiente-inicio: #50CC70;
+    --cor-whats-gradiente-fim: #0D7412;
+    
+    /* Cores de Texto Padrão */
+    --cor-texto-escuro: #2D3D52;      /* Texto principal para contraste seguro */
+    --cor-texto-suave: #607D8B;       /* Texto secundário para descrições */
+    --cor-texto-mutado: rgba(255, 255, 255, 0.85); /* Texto claro sobre fundos escuros */
+
+    /* Tipografia de Alta Costura */
+    --fonte-titulos-hero: 'Cinzel', serif;
+    --fonte-titulos-secao: 'Crimson Text', serif;
+    --fonte-geral: 'Montserrat', sans-serif;
+    --fonte-rodape: 'Poppins', sans-serif;
+
+    /* Configurações de Raio e Transição */
+    --radius-lg: 10px;
+    --radius-md: 5px;
+    --radius-circle: 50%;
+    --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    /* Sombras Elevadas */
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --sombra-media: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --sombra-forte: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset de margens e box-sizing para layout fluido */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Comportamento de rolagem suave e definição do tamanho base de fontes */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+/* Estilos para o corpo da página */
+body {
+    font-family: var(--fonte-geral);
+    color: var(--cor-texto-escuro);
+    background-color: var(--cor-branco);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Alinhamento de blocos de parágrafo gerais para visual limpo */
+p {
+    text-align: justify;
+}
+
+/* Exceções de alinhamento para parágrafos curtos, centralizados ou descritores */
+.hero-description,
+.sobre-content p,
+.diferencial-card p,
+.faq-resposta p,
+.wa-mini-balao p {
+    text-align: left;
+}
+
+.secao-header p,
+.resultado-aviso,
+.resultado-cta-whats,
+.footer-disclaimer {
+    text-align: center;
+}
+
+/* Links em geral sem underline e com transição suave */
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transicao);
+}
+
+/* Imagens responsivas */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Títulos baseados no Design System */
+h1, h2, h3, h4 {
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+/* Destaque itálico dourado para palavras-chave nos títulos */
+.destaque-dourado {
+    color: var(--cor-dourado);
+    font-style: italic;
+    font-family: var(--fonte-titulos-secao);
+}
+
+/* Sub-tags (pequenos títulos em caixa alta sobre títulos de seções) */
+.sub-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--cor-dourado);
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* Container responsivo padrão de largura do projeto */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================================================
+   BOTÕES PREMIUM REUTILIZÁVEIS
+   ========================================================================== */
+
+/* Classe base para botões da LP */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 32px;
+    border-radius: var(--radius-md);
+    font-family: var(--fonte-geral);
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Pseudo-elemento para o efeito de Shimmer (Brilho reflexivo) */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    z-index: -1;
+    transition: left 0.6s ease-in-out;
+}
+
+/* Dispara o brilho quando o mouse passa sobre o botão */
+.btn:hover::after {
+    left: 150%;
+}
+
+/* Animação para o ícone de seta ou WhatsApp no hover */
+.btn svg {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover svg {
+    transform: scale(1.1) translateX(2px);
+}
+
+/* Botão Dourado Gradiente (Clássico LBM Law) */
+.btn-gold {
+    background: linear-gradient(133deg, var(--cor-dourado) 0%, var(--cor-dourado-escuro) 100%);
+    color: var(--cor-branco);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 25px rgba(204, 166, 80, 0.35);
+}
+
+/* Botão Verde WhatsApp (Para alta conversão) */
+.btn-whatsapp {
+    background: linear-gradient(133deg, var(--cor-whats-gradiente-inicio) 0%, var(--cor-whats-gradiente-fim) 100%);
+    color: var(--cor-branco);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 25px rgba(37, 211, 102, 0.35);
+}
+
+/* Botão Outline Transparente */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--cor-branco);
+    color: var(--cor-branco);
+}
+
+.btn-outline:hover {
+    background: linear-gradient(133deg, var(--cor-dourado) 0%, var(--cor-dourado-escuro) 100%);
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 25px rgba(204, 166, 80, 0.25);
+}
+
+/* ==========================================================================
+   HEADER / MENU DE NAVEGAÇÃO FIXO
+   ========================================================================== */
+
+/* Estilização da barra superior */
+.header-principal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(31, 42, 57, 0.85); /* Azul escuro translúcido */
+    backdrop-filter: blur(10px);              /* Efeito blur de luxo */
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+    transition: var(--transicao);
+}
+
+/* Alterações de estilo quando a página é rolada */
+.header-principal.scrolled {
+    background-color: var(--cor-azul-escuro);
+    box-shadow: var(--sombra-media);
+    border-bottom: 1px solid rgba(204, 166, 80, 0.2);
+}
+
+/* Layout flex da Navbar */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    transition: var(--transicao);
+}
+
+.header-principal.scrolled .header-container {
+    height: 75px;
+}
+
+/* Logo Lotufo Advocacia */
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo a {
+    display: block;
+}
+
+.header-logo img {
+    height: 62px;
+    width: auto;
+    display: block;
+    transition: var(--transicao);
+}
+
+/* Reduz proporcionalmente o tamanho da logo no cabeçalho quando scrolled */
+.header-principal.scrolled .header-logo img {
+    height: 52px;
+}
+
+/* Links do menu em desktop */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-link {
+    font-family: var(--fonte-geral);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--cor-branco);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-link:hover {
+    color: var(--cor-dourado);
+}
+
+/* Botão de contato na navbar */
+.header-actions .btn-contact {
+    padding: 12px 24px;
+    font-size: 0.75rem;
+    border-radius: 3px;
+}
+
+/* Botão Hamburguer para menu mobile */
+.mobile-nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--cor-branco);
+    margin: 6px 0;
+    transition: var(--transicao);
+}
+
+/* Transformação para o ícone de fechar (X) */
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Responsividade do Header */
+@media (max-width: 1024px) {
+    .header-actions {
+        display: none; /* Oculta o botão da navbar no mobile/tablet */
+    }
+    
+    .mobile-nav-toggle {
+        display: block; /* Habilita o hambúrguer */
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--cor-azul-deep);
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+}
+
+/* ==========================================================================
+   SEÇÃO HERO (ABERTURA PRINCIPAL)
+   ========================================================================== */
+
+/* Estilos de layout e imagem de fundo da Hero */
+.hero-secao {
+    background-image: url('../images/Lotufo-hero.webp');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    color: var(--cor-branco);
+    padding: 220px 0 160px;
+    position: relative;
+}
+
+/* Overlay escuro elegante para contraste com o texto */
+.hero-secao::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Sem overlay escuro no desktop */
+    z-index: 1;
+}
+
+.hero-secao .container {
+    position: relative;
+    z-index: 2; /* Mantém o texto sobre o overlay */
+}
+
+/* Grid de Hero */
+.hero-grid {
+    display: block;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-family: var(--fonte-titulos-hero);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    text-transform: uppercase;
+    line-height: 1.35;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.hero-content h1 span.dourado {
+    color: var(--cor-dourado);
+    display: block;
+    font-size: 0.95em;
+    font-weight: 400;
+}
+
+.hero-description {
+    font-size: 1.12rem;
+    font-weight: 300;
+    color: var(--cor-azul-claro);
+    margin-bottom: 40px;
+    max-width: 700px;
+}
+
+/* Flexbox para os botões do hero */
+.hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.hero-ctas .btn {
+    border-radius: 3px;
+}
+
+/* Disclaimer da Hero */
+.hero-disclaimer {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Mudança de imagem para versão mobile Portrait */
+@media (max-width: 768px) {
+    .hero-secao {
+        background-image: url('../images/HERO-MOBILE.webp');
+        background-position: center center;
+        padding: 160px 0 100px;
+        text-align: center;
+    }
+    
+    .hero-secao::before {
+        background-color: rgba(31, 42, 57, 0.7); /* Overlay mais forte no mobile */
+    }
+    
+    .hero-content h1 {
+        line-height: 1.25;
+    }
+    
+    .hero-ctas {
+        justify-content: center;
+    }
+    
+    .hero-ctas .btn {
+        width: 100%;
+    }
+    
+    .hero-disclaimer {
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   SEÇÃO ESPECIALIDADES (DOENÇAS COBERTAS)
+   ========================================================================== */
+
+/* Área de especialidades */
+.servicos-secao {
+    padding: 100px 0;
+    background-color: var(--cor-branco);
+}
+
+/* Cabeçalho centralizado das seções */
+.secao-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.secao-header h2 {
+    font-family: var(--fonte-titulos-secao);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--cor-azul-escuro);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.secao-header p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--cor-texto-suave);
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* Grid de especialidades (cards responsivos) */
+.doencas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 30px;
+}
+
+/* Estilo do card individual */
+.doenca-card {
+    background-color: var(--cor-azul-escuro);
+    border-radius: var(--radius-lg);
+    padding: 40px 30px;
+    transition: var(--transicao);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.doenca-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-media);
+}
+
+/* Ícone dentro do card */
+.doenca-icone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 25px;
+    color: var(--cor-dourado);
+    transition: var(--transicao);
+}
+
+.doenca-icone svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    transition: var(--transicao);
+}
+
+.doenca-card:hover .doenca-icone {
+    transform: scale(1.05);
+}
+
+/* Título e CID do card */
+.doenca-card h3 {
+    font-family: var(--fonte-titulos-secao);
+    font-size: 1.35rem;
+    color: var(--cor-branco);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.doenca-cid {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--cor-dourado);
+    border: 1px solid rgba(204, 166, 80, 0.4);
+    padding: 3px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Descrição interna */
+.doenca-card p {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--cor-texto-mutado);
+    line-height: 1.6;
+}
+
+/* Botão centralizado de ação abaixo do grid */
+.servicos-action {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.servicos-action .btn {
+    border-radius: 3px;
+}
+
+/* ==========================================================================
+   SEÇÃO DO SIMULADOR / CALCULADORA DE RESTITUIÇÃO
+   ========================================================================== */
+
+/* Seção de simulação */
+.simulador-secao {
+    padding: 100px 0;
+    background-color: var(--cor-gelo);
+}
+
+/* Wrapper principal da calculadora */
+.calc-wrapper {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: var(--cor-branco);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--sombra-media);
+    padding: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Título do simulador */
+.calc-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.calc-title h3 {
+    font-family: var(--fonte-titulos-secao);
+    font-size: 1.8rem;
+    color: var(--cor-azul-escuro);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.calc-title p {
+    font-size: 0.95rem;
+    color: var(--cor-texto-suave);
+    font-weight: 300;
+}
+
+/* Alerta de validação */
+#calc-alerta {
+    display: none;
+    background-color: rgba(204, 166, 80, 0.1);
+    border-left: 4px solid var(--cor-dourado);
+    padding: 15px 20px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: var(--cor-texto-escuro);
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* 1 coluna no mobile */
+    }
+    .calc-wrapper {
+        padding: 30px 20px;
+    }
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-grupo label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cor-azul-escuro);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Campos de entrada e seleção */
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #D1D5DB;
+    border-radius: var(--radius-md);
+    font-family: var(--fonte-geral);
+    font-size: 0.95rem;
+    color: var(--cor-texto-escuro);
+    background-color: var(--cor-branco);
+    outline: none;
+    transition: var(--transicao);
+}
+
+.form-input:focus {
+    border-color: var(--cor-dourado);
+    box-shadow: 0 0 0 3px rgba(204, 166, 80, 0.15);
+}
+
+/* Wrapper de moeda */
+.input-moeda-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-moeda-prefixo {
+    position: absolute;
+    left: 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cor-texto-suave);
+}
+
+.input-moeda-wrapper .form-input {
+    padding-left: 45px;
+}
+
+/* Botão calcular */
+.btn-calcular {
+    width: 100%;
+    padding: 18px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+   RESULTADOS DA CALCULADORA
+   ========================================================================== */
+
+.resultado-box {
+    display: none;
+    margin-top: 45px;
+    padding: 35px;
+    border-top: 2px solid var(--cor-dourado);
+    background-color: var(--cor-gelo);
+    border-radius: var(--radius-md);
+    animation: slideDown 0.4s ease-out forwards;
+}
+
+.resultado-box.visivel {
+    display: block;
+}
+
+.resultado-header-title {
+    font-family: var(--fonte-titulos-secao);
+    font-size: 1.3rem;
+    color: var(--cor-azul-escuro);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.resultado-linhas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.resultado-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    padding-bottom: 8px;
+}
+
+.resultado-linha span:first-child {
+    color: var(--cor-texto-suave);
+    font-weight: 300;
+}
+
+.resultado-linha .valor {
+    font-weight: 600;
+    color: var(--cor-azul-escuro);
+}
+
+/* Card Dourado com o total acumulado */
+.resultado-total-card {
+    background: linear-gradient(133deg, var(--cor-azul-escuro) 0%, var(--cor-azul-deep) 100%);
+    color: var(--cor-branco);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid rgba(204, 166, 80, 0.3);
+}
+
+.resultado-total-card .label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--cor-dourado);
+    margin-bottom: 10px;
+}
+
+.resultado-total-card .total-valor {
+    font-family: var(--fonte-geral);
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--cor-dourado);
+    line-height: 1;
+}
+
+.resultado-total-card .regime-txt {
+    font-size: 0.85rem;
+    margin-top: 15px;
+    opacity: 0.8;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 12px;
+}
+
+.resultado-aviso {
+    font-size: 0.78rem;
+    color: var(--cor-texto-suave);
+    line-height: 1.5;
+    background-color: var(--cor-branco);
+    padding: 15px;
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--cor-dourado);
+    margin-bottom: 30px;
+}
+
+.resultado-cta-whats .btn {
+    width: 100%;
+    max-width: 480px;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==========================================================================
+   SEÇÃO SOBRE NÓS
+   ========================================================================== */
+
+/* Área sobre */
+.sobre-secao {
+    padding: 100px 0 100px;
+    background-color: var(--cor-branco);
+}
+
+.sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+@media (max-width: 992px) {
+    .sobre-grid {
+        grid-template-columns: 1fr; /* 1 coluna em tablets/mobile */
+        gap: 40px;
+    }
+}
+
+/* Container de imagem institucional com carrossel */
+.sobre-imagem-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--sombra-media);
+}
+
+.sobre-imagem-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Overlay gradiente inferior na imagem */
+.sobre-decoracao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(31, 42, 57, 0) 50%, var(--cor-azul-escuro) 100%);
+    z-index: 2;
+}
+
+/* Texto sobreposto no rodapé da imagem */
+.sobre-imagem-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    z-index: 3;
+    color: var(--cor-branco);
+}
+
+.sobre-imagem-overlay h4 {
+    font-family: var(--fonte-titulos-secao);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--cor-dourado);
+    margin-bottom: 8px;
+}
+
+.sobre-imagem-overlay p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--cor-branco);
+}
+
+/* Conteúdo de texto à direita */
+.sobre-content .sub-tag {
+    margin-bottom: 15px;
+}
+
+.sobre-content h2 {
+    font-family: var(--fonte-titulos-secao);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--cor-azul-escuro);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.sobre-content p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--cor-texto-suave);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* Box de citação em destaque */
+.sobre-destaque {
+    font-family: var(--fonte-titulos-secao);
+    font-size: 1.25rem;
+    color: var(--cor-azul-escuro);
+    border-left: 2px solid var(--cor-dourado);
+    padding-left: 20px;
+    margin: 25px 0;
+    font-style: italic;
+}
+
+/* Lista do OAB do escritório */
+.sobre-oab-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.sobre-oab-item {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cor-azul-escuro);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sobre-oab-item svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--cor-dourado);
+}
+
+/* ==========================================================================
+   SEÇÃO DIFERENCIAIS
+   ========================================================================== */
+
+/* Área de diferenciais */
+.diferenciais-secao {
+    padding: 100px 0;
+    background-color: var(--cor-azul-escuro);
+}
+
+.diferenciais-secao .secao-header h2 {
+    color: var(--cor-branco);
+}
+
+.diferenciais-secao .secao-header p {
+    color: var(--cor-azul-claro);
+}
+
+/* Grid de diferenciais (3 colunas) */
+.diferenciais-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+@media (max-width: 992px) {
+    .diferenciais-grid {
+        grid-template-columns: 1fr; /* 1 coluna no mobile/tablet */
+    }
+}
+
+/* Card de diferencial */
+.diferencial-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 45px 35px;
+    transition: var(--transicao);
+    display: flex;
+    flex-direction: column;
+}
+
+.diferencial-card:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: var(--cor-dourado);
+    transform: translateY(-5px);
+}
+
+/* Ícones dos diferenciais */
+.diferencial-icone {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 25px;
+    color: var(--cor-dourado);
+}
+
+.diferencial-icone svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    fill: none;
+}
+
+.diferencial-card h3 {
+    font-family: var(--fonte-geral);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--cor-branco);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.diferencial-card p {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--cor-texto-mutado);
+    line-height: 1.65;
+}
+
+/* ==========================================================================
+   SEÇÃO FAQ (PERGUNTAS FREQUENTES ACCORDION)
+   ========================================================================== */
+
+/* Área do FAQ */
+.faq-secao {
+    padding: 100px 0;
+    background-color: var(--cor-branco);
+}
+
+/* Accordion wrapper */
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Item individual do FAQ */
+.faq-item {
+    background-color: var(--cor-gelo);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: var(--transicao);
+}
+
+.faq-item:hover {
+    border-color: rgba(204, 166, 80, 0.3);
+}
+
+/* Pergunta (botão de toggle) */
+.faq-pergunta {
+    width: 100%;
+    padding: 24px 30px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+}
+
+.faq-pergunta h3 {
+    font-family: var(--fonte-geral);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cor-azul-escuro);
+    padding-right: 20px;
+}
+
+/* Ícone de seta */
+.faq-icon-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    color: var(--cor-dourado);
+}
+
+.faq-icon-arrow svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Estado ativo do FAQ (Aberto) */
+.faq-item.aberto .faq-icon-arrow {
+    transform: rotate(180deg);
+}
+
+.faq-item.aberto {
+    background-color: var(--cor-branco);
+    border-color: var(--cor-dourado);
+    box-shadow: var(--sombra-suave);
+}
+
+/* Resposta interna do FAQ (com animação CSS de max-height) */
+.faq-resposta {
+    max-height: 0; /* Controlado via JS */
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.faq-resposta-conteudo {
+    padding: 0 30px 24px;
+}
+
+.faq-resposta p {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--cor-texto-suave);
+    line-height: 1.65;
+}
+
+/* ==========================================================================
+   SEÇÃO CONTATO & MAPA
+   ========================================================================== */
+
+/* Área de contato */
+.contato-secao {
+    padding: 100px 0 100px;
+    background-color: var(--cor-gelo);
+}
+
+/* Container dividido em grid (2 colunas) */
+.contato-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--sombra-media);
+    background-color: var(--cor-branco);
+}
+
+@media (max-width: 992px) {
+    .contato-split-grid {
+        grid-template-columns: 1fr; /* 1 coluna no mobile/tablet */
+    }
+}
+
+/* Coluna de informações de contato (esquerda) */
+.contato-info-col {
+    padding: 60px;
+    background-color: var(--cor-branco);
+}
+
+.contato-info-col h3 {
+    font-family: var(--fonte-titulos-secao);
+    font-size: 1.8rem;
+    color: var(--cor-azul-escuro);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+/* Lista de contatos */
+.contato-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.contato-lista-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.contato-lista-icone {
+    width: 24px;
+    height: 24px;
+    color: var(--cor-dourado);
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.contato-lista-icone svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.contato-lista-texto h4 {
+    font-family: var(--fonte-geral);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--cor-texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.contato-lista-texto p {
+    font-size: 0.95rem;
+    color: var(--cor-azul-escuro);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.contato-lista-texto a:hover {
+    color: var(--cor-dourado);
+}
+
+/* Redes Sociais do contato */
+.contato-redes {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.contato-rede-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-circle);
+    background-color: var(--cor-gelo);
+    color: var(--cor-azul-escuro);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.contato-rede-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.contato-rede-btn:hover {
+    background-color: var(--cor-dourado);
+    color: var(--cor-branco);
+    transform: translateY(-2px);
+}
+
+/* Coluna do mapa embutido (direita) */
+.contato-mapa-col {
+    position: relative;
+    min-height: 450px;
+}
+
+.contato-mapa-col iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .contato-info-col {
+        padding: 40px 20px;
+    }
+    .contato-mapa-col {
+        min-height: 350px;
+    }
+}
+
+/* ==========================================================================
+   SEÇÃO FOOTER / RODAPÉ DO PROJETO
+   ========================================================================== */
+
+.footer-principal {
+    background-color: var(--cor-azul-escuro);
+    color: var(--cor-branco);
+    padding: 80px 0 0;
+    font-family: var(--fonte-rodape);
+}
+
+/* Parte superior do footer */
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo a {
+    display: block;
+}
+
+.footer-logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+/* Imagem da Mega Ads (produção) */
+.footer-mga-logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* Bloco do meio do footer: Disclaimers e Direitos autorais */
+.footer-mid {
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.footer-copyright {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--cor-branco);
+    text-align: center;
+}
+
+.footer-disclaimer {
+    font-size: 0.65rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 900px;
+    line-height: 1.7;
+}
+
+/* Rodapé inferior (barra final) */
+.footer-bottom {
+    background-color: var(--cor-azul-deep);
+    padding: 20px 0;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* ==========================================================================
+   EXTRAS: BOTÃO FLUTUANTE DO WHATSAPP COM MINI-BALÃO DE PERFIL
+   ========================================================================== */
+
+/* Container fixo no canto inferior direito */
+.wa-flutuante-wrapper {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Balão flutuante (Tooltip de chat) */
+.wa-mini-balao {
+    background-color: var(--cor-branco);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--sombra-forte);
+    padding: 15px 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 320px;
+    width: max-content;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+/* Pequeno triângulo na parte inferior para simular balão de chat */
+.wa-mini-balao::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 24px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--cor-branco);
+}
+
+/* Foto do perfil do balão */
+.wa-perfil-wrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-circle);
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid var(--cor-whats-verde);
+    /* Altera o fundo do wrapper do logotipo para azul escuro para dar melhor contraste e destaque à logo */
+    background-color: var(--cor-azul-escuro);
+}
+
+.wa-perfil-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Conteúdo de texto do balão */
+.wa-balao-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.wa-balao-texto h5 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cor-azul-escuro);
+    margin-bottom: 2px;
+}
+
+.wa-balao-texto p {
+    font-size: 0.75rem;
+    color: var(--cor-texto-suave);
+    line-height: 1.3;
+}
+
+/* Ícone de bola verde "Online" */
+.wa-perfil-status {
+    position: relative;
+}
+
+.wa-perfil-status::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-circle);
+    background-color: var(--cor-whats-verde);
+    border: 2px solid var(--cor-branco);
+}
+
+/* Botão redondo do WhatsApp */
+.wa-btn-flutuante {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-circle);
+    background: linear-gradient(135deg, var(--cor-whats-gradiente-inicio) 0%, var(--cor-whats-gradiente-fim) 100%);
+    color: var(--cor-branco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombra-forte);
+    cursor: pointer;
+    transition: var(--transicao);
+    animation: waPulse 2s infinite;
+}
+
+.wa-btn-flutuante svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    transition: var(--transicao);
+}
+
+/* Hover no botão flutuante */
+.wa-btn-flutuante:hover {
+    transform: scale(1.08) rotate(8deg);
+    box-shadow: 0px 8px 30px rgba(37, 211, 102, 0.5);
+}
+
+/* Ativação do balão no hover do wrapper */
+.wa-flutuante-wrapper:hover .wa-mini-balao,
+.wa-mini-balao.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Animação de pulsação para o botão flutuante */
+@keyframes waPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+@media (max-width: 768px) {
+    .wa-flutuante-wrapper {
+        bottom: 20px;
+        right: 20px;
+    }
+    .wa-mini-balao {
+        max-width: 280px; /* Reduz um pouco no mobile */
+    }
+}

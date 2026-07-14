@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <!-- 
+    PROJETO: Landing Page Lotufo Advocacia
+    Nicho: Direito Previdenciário (Isenção de Imposto de Renda para Doenças Graves)
+    Agência: Mega Ads
+    Stack: HTML, CSS e JS puros, sem dependências externas.
+  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- ─── TAGS DE SEO PRIMÁRIAS ────────────────────────────────────────── -->
+  <title>Lotufo & Bastos Musha Advogados | Isenção de Imposto de Renda</title>
+  <meta name="description"
+    content="Aposentados, pensionistas e militares reformados com diagnóstico de câncer, cardiopatia grave, Parkinson ou outra doença grave têm direito à isenção de IR e restituição dos últimos 5 anos. Lotufo & Bastos Musha Advogados — Vila Mariana/SP." />
+  <meta name="keywords"
+    content="isenção imposto de renda, doença grave, aposentado, pensionista, restituição imposto de renda, Lotufo Advocacia, OAB SP, Vila Mariana" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Lotufo & Bastos Musha Advogados" />
+  <link rel="canonical" href="https://trabalhista.lbmlaw.com.br/" />
+
+  <!-- ─── META TAGS OPEN GRAPH (Redes Sociais) ────────────────────────── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://trabalhista.lbmlaw.com.br/" />
+  <meta property="og:title" content="Lotufo & Bastos Musha Advogados | Isenção de Imposto de Renda por Doença Grave" />
+  <meta property="og:description"
+    content="Saiba se o seu diagnóstico garante isenção do IRPF e a devolução de valores cobrados indevidamente nos últimos 5 anos. Simulação gratuita." />
+  <meta property="og:image" content="images/Lotufo-hero.webp" />
+
+  <!-- ─── GOOGLE TAG MANAGER (GTM) ─────────────────────────────────────── -->
+  <!-- Código do script principal do GTM para rastreamento de visitas e ações -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-53DR6RXK');
+  </script>
+  <!-- Fim do Google Tag Manager -->
+
+  <!-- Vinculação do CSS principal local -->
+  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="CSS/chatbot.css" />
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <!-- Código de fallback do GTM noscript para navegadores com JS desativado -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53DR6RXK" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- Fim do Google Tag Manager (noscript) -->
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       HEADER / MENU DE NAVEGAÇÃO SUPERIOR
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <header class="header-principal" id="header-principal" role="banner">
+    <div class="container header-container">
+
+      <!-- Logotipo do escritório no canto esquerdo -->
+      <div class="header-logo">
+        <a href="#inicio" aria-label="Ir para o início do site Lotufo Advocacia">
+          <img src="Assets/LBM.webp" alt="Logo Lotufo & Bastos Musha Advogados" />
+        </a>
+      </div>
+
+      <!-- Links de navegação suave (Desktop e Mobile) -->
+      <nav role="navigation" aria-label="Navegação principal">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#inicio" class="nav-link">Início</a></li>
+          <li><a href="#especialidades" class="nav-link">Especialidades</a></li>
+          <li><a href="javascript:abrirChatbot(true)" class="nav-link">Simulador</a></li>
+          <li><a href="#sobre" class="nav-link">Sobre nós</a></li>
+          <li><a href="#contato" class="nav-link">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botão CTA rápido na navbar (oculto no mobile por CSS) -->
+      <div class="header-actions">
+        <!-- Atualizado para o novo telefone de atendimento 5511943099915 -->
+        <a href="javascript:abrirChatbot(true)"
+          class="btn btn-gold btn-contact"
+          aria-label="Falar com um advogado pelo WhatsApp">
+          Entrar em contato!
+        </a>
+      </div>
+
+      <!-- Botão Hambúrguer para alternância do menu mobile -->
+      <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Abrir ou fechar menu de navegação"
+        aria-expanded="false" aria-controls="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO HERO / ABERTURA COM APRESENTAÇÃO E CTAs
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="hero-secao" id="inicio" aria-labelledby="hero-titulo">
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Conteúdo textual de alto impacto -->
+        <div class="hero-content">
+          <span class="sub-tag">Direito Previdenciário & Tributário</span>
+          <h1 id="hero-titulo">
+            Isenção de Imposto de Renda
+            <span class="destaque-dourado">por Doença Grave</span>
+          </h1>
+
+          <p class="hero-description">
+            Se você é <strong>aposentado, pensionista ou militar reformado</strong> e possui alguma doença grave (como
+            câncer, cardiopatia ou Parkinson), a lei garante que você <strong>não pague Imposto de Renda</strong> e
+            receba a <strong>restituição dos últimos 5 anos</strong> de imposto pago.
+          </p>
+
+          <!-- Botões de ação principais -->
+          <div class="hero-ctas">
+            <a href="javascript:abrirChatbot(true)" class="btn btn-gold" aria-label="Ir para a calculadora de restituição do IRPF">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="9" y1="9" x2="15" y2="9"></line>
+                <line x1="9" y1="13" x2="15" y2="13"></line>
+                <line x1="9" y1="17" x2="15" y2="17"></line>
+              </svg>
+              Simular Restituição
+            </a>
+
+            <a href="javascript:abrirChatbot(true)"
+              class="btn btn-outline"
+              aria-label="Falar com um advogado diretamente no WhatsApp">
+              Falar com um Advogado
+            </a>
+          </div>
+
+          <!-- Disclaimer regulamentar sutil abaixo dos botões -->
+          <div class="hero-disclaimer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="color:var(--cor-dourado);" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Análise confidencial de documentos • OAB nº 53.225</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO ESPECIALIDADES (GRID DE DOENÇAS PREVISTAS EM LEI)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="servicos-secao" id="especialidades" aria-labelledby="especialidades-titulo">
+    <div class="container">
+
+      <!-- Cabeçalho centralizado -->
+      <div class="secao-header">
+        <span class="sub-tag">Precisa de ajuda?</span>
+        <h2 id="especialidades-titulo">Principais diagnósticos cobertos pela Lei</h2>
+        <p>A Lei Federal 7.713/88 (Art. 6º, inciso XIV) garante isenção total de IRPF para portadores de diversas
+          patologias graves. Conheça as principais:</p>
+      </div>
+
+      <!-- Grid de 8 doenças (idêntico à estrutura LBM de 8 especialidades) -->
+      <div class="doencas-grid">
+
+        <!-- Card 1: Câncer -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de prancheta/card -->
+              <path
+                d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z">
+              </path>
+            </svg>
+          </div>
+          <h3>Neoplasia Maligna (Câncer)</h3>
+          <span class="doenca-cid">CID: C00 a C97</span>
+          <p>Qualquer tipo de neoplasia diagnosticada, sem necessidade de apresentar sintomas ativos ou incapacidade
+            laboral no momento do requerimento.</p>
+        </article>
+
+        <!-- Card 2: Cardiopatia Grave -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de relógio/tempo -->
+              <path
+                d="M496 224c-79.6 0-144 64.4-144 144s64.4 144 144 144 144-64.4 144-144-64.4-144-144-144zm64 150.3c0 5.3-4.4 9.7-9.7 9.7h-60.6c-5.3 0-9.7-4.4-9.7-9.7v-76.6c0-5.3 4.4-9.7 9.7-9.7h12.6c5.3 0 9.7 4.4 9.7 9.7V352h38.3c5.3 0 9.7 4.4 9.7 9.7v12.6zM320 368c0-27.8 6.7-54.1 18.2-77.5-8-1.5-16.2-2.5-24.6-2.5h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h347.1c-45.3-31.9-75.1-84.5-75.1-144zm-96-112c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128z">
+              </path>
+            </svg>
+          </div>
+          <h3>Cardiopatia Grave</h3>
+          <span class="doenca-cid">CID: I00 a I99</span>
+          <p>Comprometimento crônico do coração que reduz a capacidade física e funcional, exigindo tratamento contínuo
+            ou cirúrgico (ex: infarto, ponte de safena).</p>
+        </article>
+
+        <!-- Card 3: Doença de Parkinson -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de exclamação/perigo -->
+              <path
+                d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z">
+              </path>
+            </svg>
+          </div>
+          <h3>Doença de Parkinson</h3>
+          <span class="doenca-cid">CID: G20</span>
+          <p>Condição degenerativa que afeta o sistema nervoso e compromete a motricidade. A isenção é garantida
+            independentemente do grau de severidade.</p>
+        </article>
+
+        <!-- Card 4: Alienação Mental -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de agenda/contatos -->
+              <path
+                d="M436 160c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20c6.6 0 12-5.4 12-12v-40c0-6.6-5.4-12-12-12h-20v-64h20zm-68 304H48V48h320v416zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2z">
+              </path>
+            </svg>
+          </div>
+          <h3>Alienação Mental (Alzheimer, etc.)</h3>
+          <span class="doenca-cid">CID: F00 a F99</span>
+          <p>Distúrbios cognitivos graves que incapacitam o indivíduo para a vida civil e social normal, como estados
+            demenciais avançados ou Alzheimer.</p>
+        </article>
+
+        <!-- Card 5: Nefropatia Grave -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de usuário cancelado -->
+              <path
+                d="M589.6 240l45.6-45.6c6.3-6.3 6.3-16.5 0-22.8l-22.8-22.8c-6.3-6.3-16.5-6.3-22.8 0L544 194.4l-45.6-45.6c-6.3-6.3-16.5-6.3-22.8 0l-22.8 22.8c-6.3 6.3-6.3 16.5 0 22.8l45.6 45.6-45.6 45.6c-6.3 6.3-6.3 16.5 0 22.8l22.8 22.8c6.3 6.3 16.5 6.3 22.8 0l45.6-45.6 45.6 45.6c6.3 6.3 16.5 6.3 22.8 0l22.8-22.8c6.3-6.3 6.3-16.5 0-22.8L589.6 240zM224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z">
+              </path>
+            </svg>
+          </div>
+          <h3>Nefropatia Grave (Doença Renal)</h3>
+          <span class="doenca-cid">CID: N17 a N19</span>
+          <p>Comprometimento progressivo e irreversível da função dos rins (insuficiência renal crônica), inclusive os
+            casos sob tratamento de hemodiálise.</p>
+        </article>
+
+        <!-- Card 6: Hepatopatia Grave -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de gravata/profissional -->
+              <path
+                d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm95.8 32.6L272 480l-32-136 32-56h-96l32 56-32 136-47.8-191.4C56.9 292 0 350.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-72.1-56.9-130.4-138.2-133.8z">
+              </path>
+            </svg>
+          </div>
+          <h3>Hepatopatia Grave (Fígado)</h3>
+          <span class="doenca-cid">CID: K70 a K77</span>
+          <p>Enfermidades hepáticas crônicas graves (ex: cirrose hepática irreversível, hepatite crônica grave com
+            evolução para insuficiência hepática).</p>
+        </article>
+
+        <!-- Card 7: Paralisia Irreversível -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de paciente/acidente -->
+              <path
+                d="M277.37 11.98C261.08 4.47 243.11 0 224 0c-53.69 0-99.5 33.13-118.51 80h81.19l90.69-68.02zM342.51 80c-7.9-19.47-20.67-36.2-36.49-49.52L239.99 80h102.52zM224 256c70.69 0 128-57.31 128-128 0-5.48-.95-10.7-1.61-16H97.61c-.67 5.3-1.61 10.52-1.61 16 0 70.69 57.31 128 128 128zM80 299.7V512h128.26l-98.45-221.52A132.835 132.835 0 0 0 80 299.7zM0 464c0 26.51 21.49 48 48 48V320.24C18.88 344.89 0 381.26 0 422.4V464zm256-48h-55.38l42.67 96H256c26.47 0 48-21.53 48-48s-21.53-48-48-48zm57.6-128h-16.71c-22.24 10.18-46.88 16-72.89 16s-50.65-5.82-72.89-16h-7.37l42.67 96H256c44.11 0 80 35.89 80 80 0 18.08-6.26 34.59-16.41 48H400c26.51 0 48-21.49 48-48v-41.6c0-74.23-60.17-134.4-134.4-134.4z">
+              </path>
+            </svg>
+          </div>
+          <h3>Paralisia Irreversível e Incapacitante</h3>
+          <span class="doenca-cid">CID: G80 a G83</span>
+          <p>Perda definitiva da mobilidade de um ou mais membros decorrente de AVC, paraplegia, tetraplegia ou outras
+            lesões medulares irreversíveis.</p>
+        </article>
+
+        <!-- Card 8: Cegueira (inclui Monocular) -->
+        <article class="doenca-card">
+          <div class="doenca-icone" aria-hidden="true">
+            <svg viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ícone de balança de justiça -->
+              <path
+                d="M256 336h-.02c0-16.18 1.34-8.73-85.05-181.51-17.65-35.29-68.19-35.36-85.87 0C-2.06 328.75.02 320.33.02 336H0c0 44.18 57.31 80 128 80s128-35.82 128-80zM128 176l72 144H56l72-144zm511.98 160c0-16.18 1.34-8.73-85.05-181.51-17.65-35.29-68.19-35.36-85.87 0-87.12 174.26-85.04 165.84-85.04 181.51H384c0 44.18 57.31 80 128 80s128-35.82 128-80h-.02zM440 320l72-144 72 144H440zm88 128H352V153.25c23.51-10.29 41.16-31.48 46.39-57.25H528c8.84 0 16-7.16 16-16V48c0-8.84-7.16-16-16-16H383.64C369.04 12.68 346.09 0 320 0s-49.04 12.68-63.64 32H112c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h129.61c5.23 25.76 22.87 46.96 46.39 57.25V448H112c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h416c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z">
+              </path>
+            </svg>
+          </div>
+          <h3>Cegueira (Total e Monocular)</h3>
+          <span class="doenca-cid">CID: H54</span>
+          <p>Comprometimento visual severo ou perda da visão em um dos olhos (cegueira monocular). Direito sumulado pela
+            jurisprudência dos tribunais federais.</p>
+        </article>
+
+      </div>
+
+      <!-- Botão CTA centralizado abaixo do grid das doenças -->
+      <div class="servicos-action">
+        <a href="javascript:abrirChatbot(true)"
+          class="btn btn-gold"
+          aria-label="Analisar meu caso gratuitamente pelo WhatsApp">
+          Falar com um Advogado
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO DO SIMULADOR (CALCULADORA INTERATIVA DE RESTITUIÇÃO DE IRPF)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="simulador-secao" id="simulador" aria-labelledby="simulador-titulo">
+    <div class="container">
+
+      <!-- Cabeçalho centralizado -->
+      <div class="secao-header">
+        <span class="sub-tag">Calculadora</span>
+        <h2 id="simulador-titulo">Veja o quanto você pode recuperar</h2>
+        <p>Preencha os campos abaixo com as informações reais para simular sua economia mensal futura e a estimativa
+          retroativa dos últimos 5 anos.</p>
+      </div>
+
+      <!-- Wrapper da Calculadora -->
+      <div class="calc-wrapper">
+        <div class="calc-title">
+          <h3>Simular Minha Restituição</h3>
+          <p>Cálculo estimado conforme a tabela progressiva do Imposto de Renda Pessoa Física.</p>
+        </div>
+
+        <!-- Mensagem de Alerta para Validações (gerenciado pelo JS) -->
+        <div id="calc-alerta" role="alert" aria-live="assertive"></div>
+
+        <!-- Formulário de Entrada -->
+        <form id="form-calculadora" onsubmit="event.preventDefault();">
+          <div class="form-grid">
+
+            <!-- Campo 1: Doença diagnosticada -->
+            <div class="form-grupo">
+              <label for="cid-select">1. Doença grave diagnosticada</label>
+              <select id="cid-select" class="form-input" required>
+                <option value="">— Selecione a doença —</option>
+                <option value="neoplasia">Neoplasia Maligna (Câncer) — CID: C00–C97</option>
+                <option value="cardiopatia">Cardiopatia Grave — CID: I00–I99</option>
+                <option value="parkinson">Doença de Parkinson — CID: G20</option>
+                <option value="alienacao">Alienação Mental (Alzheimer, etc.) — CID: F00–F99</option>
+                <option value="nefropatia">Nefropatia Grave (Rim) — CID: N17–N19</option>
+                <option value="hepatopatia">Hepatopatia Grave (Fígado) — CID: K70–K77</option>
+                <option value="paralisia">Paralisia Irreversível e Incapacitante — CID: G80–G83</option>
+                <option value="cegueira">Cegueira (inclui monocular) — CID: H54</option>
+                <option value="esclerose">Esclerose Múltipla — CID: G35</option>
+                <option value="tuberculose">Tuberculose Ativa — CID: A15–A19</option>
+                <option value="aids">AIDS (HIV) — CID: B20–B24</option>
+                <option value="hanseniase">Hanseníase — CID: A30</option>
+                <option value="espondiloartrose">Espondiloartrose Anquilosante — CID: M45</option>
+                <option value="paget">Doença de Paget (avançada) — CID: M88</option>
+                <option value="radiacao">Contaminação por Radiação — CID: W88–W90</option>
+                <option value="profissional">Moléstia Profissional / Ocupacional — CID: Z57</option>
+              </select>
+            </div>
+
+            <!-- Campo 2: Regime Previdenciário -->
+            <div class="form-grupo">
+              <label for="regime-aposentadoria">2. Regime da aposentadoria/pensão</label>
+              <select id="regime-aposentadoria" class="form-input" required>
+                <option value="INSS (Regime Geral)">INSS (Regime Geral)</option>
+                <option value="Servidor Público (RPPS)">Servidor Público (RPPS)</option>
+                <option value="Militar (Forças Armadas)">Militar (Forças Armadas)</option>
+                <option value="Previdência Privada / Complementar">Previdência Privada / Complementar</option>
+              </select>
+            </div>
+
+            <!-- Campo 3: Valor Bruto Recebido -->
+            <div class="form-grupo">
+              <label for="valor-bruto">3. Rendimento mensal bruto (aposentadoria/pensão)</label>
+              <div class="input-moeda-wrapper">
+                <span class="input-moeda-prefixo">R$</span>
+                <input type="number" id="valor-bruto" class="form-input" placeholder="Ex: 8500" min="0" step="0.01"
+                  required />
+              </div>
+            </div>
+
+            <!-- Campo 4: Anos pagando Imposto de Renda -->
+            <div class="form-grupo">
+              <label for="anos-pagando">4. Há quantos anos desconta IR sobre esse benefício?</label>
+              <select id="anos-pagando" class="form-input" required>
+                <option value="5">5 anos ou mais (limite máximo de restituição)</option>
+                <option value="4">4 anos</option>
+                <option value="3">3 anos</option>
+                <option value="2">2 anos</option>
+                <option value="1">1 ano</option>
+                <option value="0">Menos de 1 ano</option>
+              </select>
+            </div>
+
+            <!-- Campo 5: Ano do diagnóstico -->
+            <div class="form-grupo">
+              <label for="ano-diagnostico">5. Ano em que obteve o diagnóstico da doença</label>
+              <input type="number" id="ano-diagnostico" class="form-input" placeholder="Ex: 2022" min="1970" max="2026"
+                required />
+            </div>
+
+            <!-- Campo 6: Idade atual do beneficiário -->
+            <div class="form-grupo">
+              <label for="idade-atual">6. Idade atual do contribuinte (anos)</label>
+              <input type="number" id="idade-atual" class="form-input" placeholder="Ex: 67" min="1" max="120"
+                required />
+            </div>
+
+          </div>
+
+          <!-- Botão para cálculo -->
+          <button type="button" class="btn btn-gold btn-calcular" id="btn-calcular"
+            aria-label="Calcular estimativa de restituição do IRPF">
+            Calcular Estimativa Gratuita
+          </button>
+        </form>
+
+        <!-- Container de Exibição de Resultados (Gerenciado via JS) -->
+        <div class="resultado-box" id="resultado">
+          <div class="resultado-header-title">📋 Relatório da Simulação</div>
+
+          <div class="resultado-linhas">
+            <div class="resultado-linha">
+              <span>Rendimento mensal bruto:</span>
+              <span class="valor" id="res-bruto">R$ 0,00</span>
+            </div>
+            <div class="resultado-linha">
+              <span>Imposto de Renda mensal (estimado):</span>
+              <span class="valor" id="res-ir-mensal">R$ 0,00</span>
+            </div>
+            <div class="resultado-linha">
+              <span>Imposto de Renda anual estimado:</span>
+              <span class="valor" id="res-ir-anual">R$ 0,00</span>
+            </div>
+            <div class="resultado-linha">
+              <span>Período retroativo elegível:</span>
+              <span class="valor" id="res-anos">0 anos</span>
+            </div>
+            <div class="resultado-linha">
+              <span>💰 Estimativa de Restituição Retroativa:</span>
+              <span class="valor" id="res-retroativo-total" style="color:var(--cor-dourado); font-weight:600;">R$
+                0,00</span>
+            </div>
+            <div class="resultado-linha">
+              <span>Anos de economia futuros projetados:</span>
+              <span class="valor" id="res-anos-futuros">0 anos</span>
+            </div>
+            <div class="resultado-linha">
+              <span>💰 Economia Futura Projetada (Expectativa IBGE):</span>
+              <span class="valor" id="res-economia-futura" style="color:var(--cor-dourado); font-weight:600;">R$
+                0,00</span>
+            </div>
+          </div>
+
+          <!-- Card de Destaque Total -->
+          <div class="resultado-total-card">
+            <div class="label">🏆 Benefício Financeiro Total Estimado</div>
+            <div class="total-valor" id="res-total">R$ 0,00</div>
+            <div class="regime-txt">Regime Previdenciário: <span id="res-regime-txt">INSS</span></div>
+          </div>
+
+          <!-- Aviso explicativo legal -->
+          <p class="resultado-aviso">
+            Atenção: A simulação tem caráter meramente informativo e baseia-se nas regras gerais de isenção de IRPF da
+            Lei 7.713/88. Valores oficiais podem variar dependendo de outros rendimentos tributáveis e da correção pela
+            taxa Selic.
+          </p>
+
+          <!-- Botão para enviar dados para o advogado - Link padrão de fallback atualizado -->
+          <div class="resultado-cta-whats">
+            <a href="https://api.whatsapp.com/send/?phone=5511943099915&text=Olá!%20Gostaria%20de%20falar%20com%20um%20advogado%20sobre%20isenção%20de%20Imposto%20de%20Renda." class="btn btn-whatsapp" id="btn-wa-resultado" target="_blank" rel="noopener noreferrer"
+              aria-label="Enviar simulação para análise do advogado pelo WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Enviar Resultados e Agendar Análise Gratuita
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO SOBRE NÓS E NOSSOS DIFERENCIAIS
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="sobre-secao" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="container">
+      <div class="sobre-grid">
+
+        <!-- Coluna da esquerda: Bloco Visual Institucional -->
+        <div class="sobre-imagem-wrapper">
+          <div class="sobre-decoracao" aria-hidden="true"></div>
+          <img src="images/SOBRE.webp" alt="Recepção do escritório Lotufo & Bastos Musha Advogados em São Paulo"
+            loading="lazy" />
+
+          <div class="sobre-imagem-overlay">
+            <h4>Lotufo & Bastos Musha</h4>
+            <p>Advocacia Previdenciária & Tributária Especializada</p>
+          </div>
+        </div>
+
+        <!-- Coluna da direita: Textos Institucionais -->
+        <div class="sobre-content">
+          <span class="sub-tag">Sobre Nós</span>
+          <h2 id="sobre-titulo">Comprometidos com a defesa dos seus direitos</h2>
+
+          <p>
+            Nosso escritório nasceu com o propósito de oferecer suporte jurídico especializado a aposentados e
+            pensionistas, atuando com ética, transparência e compromisso com o resultado.
+          </p>
+
+          <blockquote class="sobre-destaque">
+            "Oferecemos assessoria humanizada para garantir que o aposentado com doença grave usufrua dos benefícios
+            fiscais previstos em lei."
+          </blockquote>
+
+          <p>
+            Entendemos que o processo para obtenção de isenção tributária exige atenção minuciosa aos detalhes médicos e
+            jurídicos. Por isso, nossa equipe analisa cada laudo individualmente para estruturar a tese jurídica mais
+            adequada, buscando não apenas cessar os descontos futuros de IRPF, mas recuperar tudo o que foi pago nos
+            últimos 5 anos.
+          </p>
+
+          <!-- OAB e certificação -->
+          <ul class="sobre-oab-list">
+            <li class="sobre-oab-item">
+              <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M458.622 255.92l45.985-45.005c13.708-12.977 7.316-36.039-10.664-40.339l-62.65-15.99 17.661-62.015c4.991-17.838-11.829-34.663-29.661-29.671l-61.994 17.667-15.984-62.671C337.085.197 313.765-6.276 300.99 7.228L256 53.57 211.011 7.229c-12.63-13.351-36.047-7.234-40.325 10.668l-15.984 62.671-61.995-17.667C74.87 57.907 58.056 74.738 63.046 92.572l17.661 62.015-62.65 15.99C.069 174.878-6.31 197.944 7.392 210.915l45.985 45.005-45.985 45.004c-13.708 12.977-7.316 36.039 10.664 40.339l62.65 15.99-17.661 62.015c-4.991 17.838 11.829 34.663 29.661 29.671l61.994-17.667 15.984 62.671c4.439 18.575 27.696 24.018 40.325 10.668L256 458.61l44.989 46.001c12.5 13.488 35.987 7.486 40.325-10.668l15.984-62.671 61.994 17.667c17.836 4.994 34.651-11.837 29.661-29.671l-17.661-62.015 62.65-15.99c17.987-4.302 24.366-27.367 10.664-40.339l-45.984-45.004z">
+                </path>
+              </svg>
+              <span>OAB/SP nº 53.225</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO DIFERENCIAIS (3 COLUNAS COM PILARES DO ESCRITÓRIO)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="diferenciais-secao" aria-labelledby="diferenciais-titulo">
+    <div class="container">
+
+      <!-- Cabeçalho de Diferenciais -->
+      <div class="secao-header">
+        <span class="sub-tag">Diferenciais</span>
+        <h2 id="diferenciais-titulo">Nossos pilares de atuação</h2>
+        <p>Garantimos excelência e profissionalismo em cada etapa da jornada de isenção tributária.</p>
+      </div>
+
+      <!-- Grid de Diferenciais -->
+      <div class="diferenciais-grid">
+
+        <!-- Diferencial 1: Ética e Transparência -->
+        <article class="diferencial-card">
+          <div class="diferencial-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <h3>Ética e Transparência</h3>
+          <p>Clareza absoluta sobre a viabilidade jurídica do seu caso. Sem falsas promessas, com análise séria do laudo
+            médico antes de qualquer medida.</p>
+        </article>
+
+        <!-- Diferencial 2: Atendimento Humanizado -->
+        <article class="diferencial-card">
+          <div class="diferencial-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <circle cx="9" cy="7" r="4" stroke-width="2"></circle>
+              <path d="M19 8c.5-1.5 2.5-1.5 3 0 0 2-3 4-3 4s-3-2-3-4c.5-1.5 2.5-1.5 3 0z" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3>Atendimento Humanizado</h3>
+          <p>Entendemos o momento delicado do diagnóstico. Oferecemos um atendimento acolhedor, cuidando de toda a
+            burocracia para que você foque na saúde.</p>
+        </article>
+
+        <!-- Diferencial 3: Foco em Resultados -->
+        <article class="diferencial-card">
+          <div class="diferencial-icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+              <circle cx="12" cy="12" r="6" stroke-width="2"></circle>
+              <circle cx="12" cy="12" r="2" stroke-width="2"></circle>
+              <path d="M22 2l-7.5 7.5" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3>Foco em Resultados</h3>
+          <p>Atuação focada no êxito e na rapidez. Buscamos maximizar o valor da restituição e acelerar a implantação da
+            isenção na fonte pagadora.</p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO FAQ (PERGUNTAS FREQUENTES)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="faq-secao" id="faq" aria-labelledby="faq-titulo">
+    <div class="container">
+
+      <div class="secao-header">
+        <span class="sub-tag">Dúvidas Frequentes</span>
+        <h2 id="faq-titulo">Perguntas comuns sobre isenção de IR</h2>
+        <p>Confira as respostas para as principais dúvidas sobre os direitos dos aposentados com doenças graves.</p>
+      </div>
+
+      <!-- FAQ Accordion -->
+      <div class="faq-wrapper">
+
+        <!-- Pergunta 1 -->
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">
+            <h3>Quem tem direito à isenção de IR por Doença Grave?</h3>
+            <span class="faq-icon-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-resposta" aria-hidden="true">
+            <div class="faq-resposta-conteudo">
+              <p>Têm direito todos os aposentados, pensionistas e militares reformados/reserva remunerada que tenham o
+                diagnóstico de alguma das 16 doenças previstas na Lei 7.713/88 (como câncer, cardiopatia grave,
+                Parkinson, nefropatia grave, cegueira, entre outras). Beneficiários de previdência privada complementar
+                também possuem o direito.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pergunta 2 -->
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">
+            <h3>Pessoas que continuam trabalhando possuem direito?</h3>
+            <span class="faq-icon-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-resposta" aria-hidden="true">
+            <div class="faq-resposta-conteudo">
+              <p>Não. A isenção de Imposto de Renda por doença grave se aplica exclusivamente aos proventos de
+                aposentadoria, pensão, reforma ou reserva remunerada. Os rendimentos recebidos de trabalho assalariado
+                ativo (CLT, autônomo, PJ) ou de aluguéis continuam sendo tributados normalmente.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pergunta 3 -->
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">
+            <h3>Como funciona a restituição dos últimos 5 anos?</h3>
+            <span class="faq-icon-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-resposta" aria-hidden="true">
+            <div class="faq-resposta-conteudo">
+              <p>Ao comprovar que a doença grave foi diagnosticada há mais tempo, o aposentado tem o direito de reaver
+                todo o Imposto de Renda retido indevidamente desde a data de diagnóstico (retroagindo ao limite
+                prescricional de 5 anos contados do requerimento). Esse valor é devolvido corrigido pela taxa Selic.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pergunta 4 -->
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">
+            <h3>É obrigatório passar por perícia do governo para obter a isenção?</h3>
+            <span class="faq-icon-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-resposta" aria-hidden="true">
+            <div class="faq-resposta-conteudo">
+              <p>Não necessariamente. Pela via judicial (Súmula 598 do STJ), o juiz pode conceder a isenção com base em
+                laudos de médicos particulares ou convênios, dispensando a exigência de laudo oficial emitido por
+                perícia do INSS ou serviço médico do Estado.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pergunta 5 -->
+        <div class="faq-item">
+          <button class="faq-pergunta" aria-expanded="false">
+            <h3>Mesmo que a doença tenha sido curada, a isenção é mantida?</h3>
+            <span class="faq-icon-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-resposta" aria-hidden="true">
+            <div class="faq-resposta-conteudo">
+              <p>Sim. A jurisprudência do STJ determina que, uma vez diagnosticada a doença grave (como no caso de
+                câncer ou cardiopatias), a isenção de Imposto de Renda deve ser mantida para evitar a recidiva da doença
+                e auxiliar no custeio dos acompanhamentos médicos preventivos.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       SEÇÃO CONTATO (DADOS DO ESCRITÓRIO E GOOGLE MAPS EM SPLIT)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="contato-secao" id="contato" aria-labelledby="contato-titulo">
+    <div class="container">
+
+      <div class="secao-header">
+        <span class="sub-tag">Fale Conosco</span>
+        <h2 id="contato-titulo">Entre em contato e agende sua consulta</h2>
+        <p>Estamos localizados na Vila Mariana, prontos para atender você de forma presencial ou online em todo o
+          Brasil.</p>
+      </div>
+
+      <!-- Split Layout: Informações de Contato + Google Maps -->
+      <div class="contato-split-grid">
+
+        <!-- Coluna da esquerda: Informações -->
+        <div class="contato-info-col">
+          <h3>Informações de Contato</h3>
+
+          <ul class="contato-lista">
+
+            <!-- WhatsApp -->
+            <li class="contato-lista-item">
+              <div class="contato-lista-icone" aria-hidden="true">
+                <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z">
+                  </path>
+                </svg>
+              </div>
+              <div class="contato-lista-texto">
+                <h4>WhatsApp</h4>
+                <!-- Atualizado para o novo telefone de atendimento 5511943099915 -->
+                <p><a
+                    href="https://api.whatsapp.com/send/?phone=5511943099915&text=Olá!%20Gostaria%20de%20falar%20com%20um%20advogado%20sobre%20isenção%20de%20Imposto%20de%20Renda."
+                    target="_blank" rel="noopener noreferrer">(11) 94309-9915</a></p>
+              </div>
+            </li>
+
+            <!-- E-mail -->
+            <li class="contato-lista-item">
+              <div class="contato-lista-icone" aria-hidden="true">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z">
+                  </path>
+                </svg>
+              </div>
+              <div class="contato-lista-texto">
+                <h4>E-mail</h4>
+                <p><a href="mailto:contato@lbmlaw.com.br">contato@lbmlaw.com.br</a></p>
+              </div>
+            </li>
+
+            <!-- Endereço -->
+            <li class="contato-lista-item">
+              <div class="contato-lista-icone" aria-hidden="true">
+                <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z">
+                  </path>
+                </svg>
+              </div>
+              <div class="contato-lista-texto">
+                <h4>Nosso Endereço</h4>
+                <p>R. Jorge Tibiriçá, 196 - Vila Mariana, São Paulo - SP, CEP 04126-000.</p>
+              </div>
+            </li>
+
+            <!-- Horários de Atendimento -->
+            <li class="contato-lista-item">
+              <div class="contato-lista-icone" aria-hidden="true">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z">
+                  </path>
+                </svg>
+              </div>
+              <div class="contato-lista-texto">
+                <h4>Atendimento</h4>
+                <p>Segunda à Sexta — das 08h00 às 18h00</p>
+              </div>
+            </li>
+
+          </ul>
+
+          <!-- Redes Sociais no bloco de contato -->
+          <div class="contato-redes" role="region" aria-label="Nossas redes sociais">
+            <a href="https://facebook.com/" class="contato-rede-btn" target="_blank" rel="noopener noreferrer"
+              aria-label="Siga-nos no Facebook">
+              <svg viewBox="0 0 512 512">
+                <path
+                  d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z">
+                </path>
+              </svg>
+            </a>
+            <a href="https://twitter.com/" class="contato-rede-btn" target="_blank" rel="noopener noreferrer"
+              aria-label="Siga-nos no Twitter">
+              <svg viewBox="0 0 512 512">
+                <path
+                  d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
+                </path>
+              </svg>
+            </a>
+            <a href="https://youtube.com/" class="contato-rede-btn" target="_blank" rel="noopener noreferrer"
+              aria-label="Siga-nos no Youtube">
+              <svg viewBox="0 0 576 512">
+                <path
+                  d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna da direita: Iframe do Google Maps -->
+        <div class="contato-mapa-col">
+          <!-- Iframe do Google Maps apontando para o novo endereço do escritório -->
+          <iframe loading="lazy"
+            src="https://maps.google.com/maps?q=R.%20Jorge%20Tibiri%C3%A7%C3%A1%2C%20196%20-%20Vila%20Mariana%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2004126-000&amp;t=m&amp;z=17&amp;output=embed&amp;iwloc=near"
+            title="Mapa de localização do escritório Lotufo Advocacia em São Paulo"
+            aria-label="Mapa de localização do escritório Lotufo Advocacia em São Paulo" allowfullscreen>
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       RODAPÉ PRINCIPAL (FOOTER)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <footer class="footer-principal" role="contentinfo">
+    <div class="container">
+
+      <!-- Linha superior do footer: Logo e Mega Ads logo -->
+      <div class="footer-top">
+        <div class="footer-logo">
+          <a href="#inicio" aria-label="Ir para o início do site Lotufo Advocacia">
+            <img src="Assets/LBM.webp" alt="Logo Lotufo & Bastos Musha Advogados" loading="lazy" />
+          </a>
+        </div>
+        <div class="footer-mga-logo">
+          <a href="https://mgaads.com/" target="_blank" rel="noopener noreferrer"
+            aria-label="Ir para o site da agência produtora Mega Ads">
+            <img src="Assets/MegaAds.png" alt="Logotipo Mega Ads" loading="lazy" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Disclaimers legais regulamentares -->
+      <div class="footer-mid">
+        <p class="footer-copyright">
+          ©2026 Lotufo & Musha Advogados — Todos os Direitos Reservados. | OAB/SP nº 53.225
+        </p>
+        <p class="footer-disclaimer">
+          Isenção de responsabilidade: Nós não temos qualquer afiliação direta ou indireta com marcas como Google, Meta
+          (Facebook/Instagram) ou órgãos governamentais de recolhimento oficial de tributos. A prestação de serviços se
+          dá única e exclusivamente no âmbito da assessoria jurídica privada. Não garantimos a concessão automática da
+          isenção sem a devida validação probatória judicial ou administrativa. Tratamos todos os dados coletados sob
+          estrita confidencialidade profissional.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Barra de direitos final -->
+    <div class="footer-bottom">
+      Produzido de forma otimizada para tráfego pago por Mega Ads.
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       EXTRAS: BOTÃO FLUTUANTE DO WHATSAPP COM MINI-BALÃO DE PERFIL
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="wa-flutuante-wrapper" id="wa-wrapper">
+
+    <!-- Mini balão flutuante que exibe em hover ou por gatilho temporal -->
+    <div class="wa-mini-balao" id="wa-balao">
+      <div class="wa-perfil-status">
+        <div class="wa-perfil-wrapper">
+          <img src="Assets/LBM.webp" alt="Foto de perfil do escritório Lotufo Advocacia" />
+        </div>
+      </div>
+      <div class="wa-balao-texto">
+        <h5>Suporte Previdenciário</h5>
+        <p>Olá! Quer saber se tem direito à isenção de IR? Fale conosco agora!</p>
+      </div>
+    </div>
+
+    <!-- Botão flutuante redondo do WhatsApp - Atualizado para o novo telefone 5511943099915 -->
+    <a href="javascript:abrirChatbot(true)"
+      class="wa-btn-flutuante" aria-label="Fale conosco no WhatsApp">
+      <!-- Ícone do WhatsApp inline SVG -->
+      <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       CONTÊINER DO CHATBOT CONVERSACIONAL (SOBREPOSIÇÃO OBRIGATÓRIA)
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div id="lbm-chat-overlay" class="chat-overlay">
+    <div class="chat-window">
+      
+      <!-- Cabeçalho com perfil da Ana -->
+      <div class="chat-header">
+        <div class="chat-avatar-wrapper">
+          <img src="Assets/LBM.webp" alt="Foto de perfil Ana" class="chat-avatar-img" />
+          <div class="chat-status-dot"></div>
+        </div>
+        <div class="chat-header-info">
+          <div class="chat-header-name">Ana</div>
+          <div class="chat-header-subtitle">Online</div>
+        </div>
+      </div>
+      
+      <!-- Barra de progresso superior -->
+      <div class="chat-progress-container">
+        <div id="lbm-chat-progress-bar" class="chat-progress-bar"></div>
+        <div id="lbm-chat-progress-text" class="chat-progress-text">Passo 0 de 10</div>
+      </div>
+      
+      <!-- Histórico de mensagens -->
+      <div id="lbm-chat-messages" class="chat-messages-area">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+      
+      <!-- Painel inferior para interações e respostas -->
+      <div id="lbm-chat-inputs" class="chat-input-panel">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Vinculação dos arquivos JavaScript locais -->
+  <script src="JS/script.js"></script>
+  <script src="JS/chatbot.js"></script>
+</body>
+
+</html>

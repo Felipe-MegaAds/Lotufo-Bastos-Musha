@@ -1,0 +1,9 @@
+# Ignorar arquivos temporários e de sistema do Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignorar pastas de ambiente virtual ou ferramentas de IA se surgirem localmente
+.gemini/
+.idea/
+.vscode/
