@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LÓGICA DO CHATBOT CONVERSACIONAL — LBM LAW
+   LÓGICA DO CHATBOT CONVERSACIONAL — LBM ADVOGADOS
    Funcionalidades:
      1. Captura e persistência de UTMs/Ad IDs no LocalStorage.
      2. Gerenciamento do fluxo de conversação (máquina de estados).
@@ -254,7 +254,8 @@ function processarNoAtual() {
     switch (no) {
         case 'N0':
             mostrarIndicadorDigitando(() => {
-                adicionarMensagem('bot', "Olá! Eu sou a Ana, consultora da <strong>LBM Law</strong>. 👋");
+                // Mensagem de boas-vindas atualizada com o novo nome do escritório
+                adicionarMensagem('bot', "Olá! Eu sou a Ana, consultora da <strong>LBM Advogados</strong>. 👋");
                 setTimeout(() => {
                     adicionarMensagem('bot', "Vou te ajudar a descobrir, em menos de 2 minutos e sem custo, se você tem direito a <strong>parar de pagar Imposto de Renda</strong> e a <strong>receber de volta</strong> o que pagou nos últimos 5 anos.");
                     setTimeout(() => {
@@ -1030,53 +1031,82 @@ function validarCPF(cpf) {
     return true;
 }
 
-// Renderiza formulário simples de e-mail para indicação na rota N1-R (não elegível)
+// Renderiza o formulário de captação de WhatsApp para outras áreas na rota N1-R (não elegível para isenção)
 function renderizarFormularioN1R() {
+    // Limpa o painel de inputs do chatbot
     chatState.inputPanel.innerHTML = '';
     
+    // Adiciona mensagem informativa sobre as outras áreas de atuação do escritório
+    adicionarMensagem('bot', "Nosso escritório também atua nas áreas <strong>Trabalhista, Previdenciária, Tributária e Cível</strong>. Caso tenha dúvida sobre seus direitos em outras áreas, informe seu WhatsApp abaixo que entramos em contato.");
+
+    // Cria contêiner para o formulário de inserção do WhatsApp
     const container = document.createElement('div');
     container.className = 'chat-form-container';
     
+    // Define a estrutura HTML com campo de WhatsApp formatado e botão de ação
     container.innerHTML = `
         <div class="chat-input-wrapper">
-            <input type="email" class="chat-text-input" placeholder="Seu melhor e-mail (opcional)" id="n1r-email" />
-            <div class="chat-input-error-msg" id="n1r-email-error">Por favor, insira um e-mail válido.</div>
+            <input type="tel" class="chat-text-input" placeholder="(11) 99999-9999" id="n1r-phone" maxlength="15" required />
+            <div class="chat-input-error-msg" id="n1r-phone-error">Por favor, digite seu WhatsApp completo com DDD.</div>
         </div>
         <div class="chat-btn-row">
             <button class="chat-skip-btn" id="n1r-share-btn" style="border-color:var(--cor-dourado); color:var(--cor-dourado);">Compartilhar Link</button>
-            <button class="chat-submit-btn" id="n1r-submit-btn">Finalizar e Acessar Site</button>
+            <button class="chat-submit-btn" id="n1r-submit-btn" disabled>Entrar em Contato</button>
         </div>
     `;
     
     chatState.inputPanel.appendChild(container);
     
-    const emailInput = document.getElementById('n1r-email');
+    const phoneInput = document.getElementById('n1r-phone');
     const shareBtn = document.getElementById('n1r-share-btn');
     const submitBtn = document.getElementById('n1r-submit-btn');
-    const errorEl = document.getElementById('n1r-email-error');
+    const errorEl = document.getElementById('n1r-phone-error');
     
-    emailInput.addEventListener('input', () => {
-        const email = emailInput.value.trim();
-        if (email.length > 0) {
-            const valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            submitBtn.disabled = !valido;
-            errorEl.style.display = valido ? 'none' : 'block';
+    // Coloca foco automático no campo de digitação
+    phoneInput.focus();
+    
+    // Adiciona máscara e validação de telefone (DDD + 9 dígitos) no campo de WhatsApp
+    phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        // Aplica a formatação do telefone: (XX) XXXXX-XXXX
+        if (value.length > 10) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+        } else if (value.length > 6) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+        } else if (value.length > 2) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+        } else if (value.length > 0) {
+            value = `(${value}`;
+        }
+        
+        e.target.value = value;
+        
+        // Libera ou bloqueia o botão de envio baseado no tamanho do número digitado
+        const digitosApenas = e.target.value.replace(/\D/g, "");
+        const valido = digitosApenas.length === 11;
+        submitBtn.disabled = !valido;
+        
+        // Exibe mensagem de erro caso o telefone seja incompleto
+        if (digitosApenas.length > 2 && digitosApenas.length < 11) {
+            errorEl.style.display = 'block';
         } else {
-            submitBtn.disabled = false;
             errorEl.style.display = 'none';
         }
     });
     
+    // Configura evento de compartilhamento do simulador
     shareBtn.addEventListener('click', () => {
         const link = obterLinkCompartilhamento();
         if (navigator.share) {
             navigator.share({
-                title: 'Simulador de Isenção de IR - LBM Law',
+                title: 'Simulador de Isenção de IR - LBM Advogados',
                 text: 'Veja em menos de 2 minutos se você tem direito a parar de pagar IR e receber restituição retroativa.',
                 url: link
             }).catch(err => console.log('Erro de compartilhamento:', err));
         } else {
-            // Fallback para cópia em clipboard
+            // Copia o link para a área de transferência do usuário como fallback
             navigator.clipboard.writeText(link).then(() => {
                 alert('Link de indicação copiado com sucesso!');
             });
@@ -1084,75 +1114,125 @@ function renderizarFormularioN1R() {
         enviarGTM('n1r_compartilhado');
     });
     
+    // Configura evento de envio do número de WhatsApp e redirecionamento de atendimento
     submitBtn.addEventListener('click', () => {
-        const email = emailInput.value.trim();
-        if (email.length > 0) {
-            dadosLead.email = email;
-            enviarLeadAoCRM("indicacao");
+        const digitosApenas = phoneInput.value.replace(/\D/g, "");
+        if (digitosApenas.length === 11) {
+            // Armazena e envia o lead de contato de outras áreas ao CRM
+            dadosLead.whatsapp = `+55${digitosApenas}`;
+            enviarLeadAoCRM("outras_areas_n1r");
+            
+            // Texto parametrizado para o WhatsApp do escritório indicando interesse em outras áreas
+            const textoWhats = `Olá! Gostaria de falar com um advogado sobre outras áreas de atuação (Trabalhista, Previdenciária, Tributária ou Cível) do escritório LBM Advogados.`;
+            const linkWhats = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMERO}&text=${encodeURIComponent(textoWhats)}`;
+            
+            // Abre o WhatsApp em uma nova aba
+            window.open(linkWhats, '_blank');
         }
+        // Fecha a sobreposição do chatbot e revela a página
         fecharChatbotRevelarLP();
     });
 }
 
-// Renderiza formulário de indicação na rota N6-A-R (baixo valor)
+// Renderiza o formulário de captação de WhatsApp para outras áreas na rota N6-A-R (baixo valor estimado de isenção)
 function renderizarFormularioN6AR() {
+    // Limpa o painel de inputs do chatbot
     chatState.inputPanel.innerHTML = '';
     
+    // Adiciona mensagem informativa sobre as outras áreas de atuação do escritório
+    adicionarMensagem('bot', "Nosso escritório também atua nas áreas <strong>Trabalhista, Previdenciária, Tributária e Cível</strong>. Caso tenha dúvida sobre seus direitos em outras áreas, informe seu WhatsApp abaixo que entramos em contato.");
+
+    // Cria contêiner para o formulário de inserção do WhatsApp
     const container = document.createElement('div');
     container.className = 'chat-form-container';
     
+    // Define a estrutura HTML com campo de WhatsApp formatado e botão de ação
     container.innerHTML = `
         <div class="chat-input-wrapper">
-            <input type="email" class="chat-text-input" placeholder="Seu melhor e-mail (opcional)" id="n6ar-email" />
-            <div class="chat-input-error-msg" id="n6ar-email-error">Por favor, insira um e-mail válido.</div>
+            <input type="tel" class="chat-text-input" placeholder="(11) 99999-9999" id="n6ar-phone" maxlength="15" required />
+            <div class="chat-input-error-msg" id="n6ar-phone-error">Por favor, digite seu WhatsApp completo com DDD.</div>
         </div>
         <div class="chat-btn-row">
             <button class="chat-skip-btn" id="n6ar-share-btn" style="border-color:var(--cor-dourado); color:var(--cor-dourado);">Compartilhar Link</button>
-            <button class="chat-submit-btn" id="n6ar-submit-btn">Finalizar e Acessar Site</button>
+            <button class="chat-submit-btn" id="n6ar-submit-btn" disabled>Entrar em Contato</button>
         </div>
     `;
     
     chatState.inputPanel.appendChild(container);
     
-    const emailInput = document.getElementById('n6ar-email');
+    const phoneInput = document.getElementById('n6ar-phone');
     const shareBtn = document.getElementById('n6ar-share-btn');
     const submitBtn = document.getElementById('n6ar-submit-btn');
-    const errorEl = document.getElementById('n6ar-email-error');
+    const errorEl = document.getElementById('n6ar-phone-error');
     
-    emailInput.addEventListener('input', () => {
-        const email = emailInput.value.trim();
-        if (email.length > 0) {
-            const valido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            submitBtn.disabled = !valido;
-            errorEl.style.display = valido ? 'none' : 'block';
+    // Coloca foco automático no campo de digitação
+    phoneInput.focus();
+    
+    // Adiciona máscara e validação de telefone (DDD + 9 dígitos) no campo de WhatsApp
+    phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        // Aplica a formatação do telefone: (XX) XXXXX-XXXX
+        if (value.length > 10) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+        } else if (value.length > 6) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+        } else if (value.length > 2) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+        } else if (value.length > 0) {
+            value = `(${value}`;
+        }
+        
+        e.target.value = value;
+        
+        // Libera ou bloqueia o botão de envio baseado no tamanho do número digitado
+        const digitosApenas = e.target.value.replace(/\D/g, "");
+        const valido = digitosApenas.length === 11;
+        submitBtn.disabled = !valido;
+        
+        // Exibe mensagem de erro caso o telefone seja incompleto
+        if (digitosApenas.length > 2 && digitosApenas.length < 11) {
+            errorEl.style.display = 'block';
         } else {
-            submitBtn.disabled = false;
             errorEl.style.display = 'none';
         }
     });
     
+    // Configura evento de compartilhamento do simulador
     shareBtn.addEventListener('click', () => {
         const link = obterLinkCompartilhamento();
         if (navigator.share) {
             navigator.share({
-                title: 'Simulador de Isenção de IR - LBM Law',
+                title: 'Simulador de Isenção de IR - LBM Advogados',
                 text: 'Faça a sua simulação de isenção de imposto de renda por doença grave.',
                 url: link
             });
         } else {
+            // Copia o link para a área de transferência do usuário como fallback
             navigator.clipboard.writeText(link).then(() => {
                 alert('Link de indicação copiado com sucesso!');
             });
         }
     });
     
+    // Configura evento de envio do número de WhatsApp e redirecionamento de atendimento
     submitBtn.addEventListener('click', () => {
-        const email = emailInput.value.trim();
-        if (email.length > 0) {
-            dadosLead.email = email;
+        const digitosApenas = phoneInput.value.replace(/\D/g, "");
+        if (digitosApenas.length === 11) {
+            // Armazena e envia o lead de contato de outras áreas ao CRM
+            dadosLead.whatsapp = `+55${digitosApenas}`;
             dadosLead.lead_score = 'baixo_valor';
-            enviarLeadAoCRM("baixo_valor_email");
+            enviarLeadAoCRM("outras_areas_n6ar");
+            
+            // Texto parametrizado para o WhatsApp do escritório indicando interesse em outras áreas e incluindo o nome do lead
+            const textoWhats = `Olá! Sou o(a) ${dadosLead.nome || 'cliente'} e gostaria de falar com um advogado sobre outras áreas de atuação (Trabalhista, Previdenciária, Tributária ou Cível) do escritório LBM Advogados.`;
+            const linkWhats = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMERO}&text=${encodeURIComponent(textoWhats)}`;
+            
+            // Abre o WhatsApp em uma nova aba
+            window.open(linkWhats, '_blank');
         }
+        // Fecha a sobreposição do chatbot e revela a página
         fecharChatbotRevelarLP();
     });
 }
@@ -1253,7 +1333,7 @@ function renderizarTelaFinalDeSucesso() {
             <button class="chat-final-btn-lp" id="chat-final-goto-lp">Acessar Site Completo</button>
         </div>
         <div class="chat-final-footer">
-            Este contato é 100% gratuito e confidencial. LBM Law — OAB/SP 53.225.
+            Este contato é 100% gratuito e confidencial. LBM Advogados — OAB/SP 53.225.
         </div>
     `;
     

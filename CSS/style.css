@@ -14,7 +14,8 @@
 
 /* Definição das variáveis globais de design para reutilização */
 :root {
-    /* Paleta de Cores Clássica e Elegante (Inspirada no modelo LBM Law) */
+    /* Paleta de Cores Clássica e Elegante (Inspirada no modelo LBM Advogados) 
+       Define as cores principais, secundárias e neutras que compõem a identidade visual do site */
     --cor-azul-escuro: #1F2A39;       /* Cor base escura (azul-acinzentado nobre) */
     --cor-azul-deep: #151D28;         /* Variante mais escura para contrastes e rodapés */
     --cor-azul-claro: #E3F2FF;        /* Variante clara para contrastar em fundos escuros */
@@ -198,7 +199,8 @@ h1, h2, h3, h4 {
     transform: scale(1.1) translateX(2px);
 }
 
-/* Botão Dourado Gradiente (Clássico LBM Law) */
+/* Botão Dourado Gradiente (Clássico LBM Advogados) 
+   Aplica um gradiente dourado sofisticado com sombra suave para destacar os botões de conversão principais */
 .btn-gold {
     background: linear-gradient(133deg, var(--cor-dourado) 0%, var(--cor-dourado-escuro) 100%);
     color: var(--cor-branco);
