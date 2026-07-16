@@ -158,7 +158,7 @@ const chatState = {
 // Mapeamento de passos para a barra de progresso (para calcular o percentual)
 const totalPassosEstimados = 10;
 const mapeamentoPassos = {
-    'N0': 0, 'N1': 1, 'N2': 2, 'N3': 3, 'N4': 4,
+    'N0': 0, 'N1': 1, 'N2': 2, 'N2-R': 2, 'N3': 3, 'N4': 4,
     'N5': 5, 'N6': 6, 'N6-A': 7, 'N6-C': 8, 'N7': 9,
     'N8': 10, 'N9': 10, 'N10': 10, 'N11': 10
 };
@@ -321,6 +321,7 @@ function processarNoAtual() {
             
         case 'N2':
             mostrarIndicadorDigitando(() => {
+                /* Exibe a mensagem do bot perguntando se é descontado IR na folha */
                 adicionarMensagem('bot', "Perfeito! Hoje é descontado algum valor de <strong>Imposto de Renda</strong> da sua aposentadoria/pensão/reforma?");
                 
                 const opcoes = [
@@ -334,9 +335,30 @@ function processarNoAtual() {
                     adicionarMensagem('user', escolha.texto);
                     enviarGTM('step_complete', { no_completo: 'N2', escolha: escolha.valor });
                     
-                    chatState.currentNode = 'N3';
+                    /* Se a opção for "Não é descontado" (false), redireciona para a recusa de desconto N2-R, encerrando o fluxo */
+                    if (escolha.valor === 'false') {
+                        chatState.currentNode = 'N2-R';
+                    } else {
+                        chatState.currentNode = 'N3';
+                    }
                     setTimeout(processarNoAtual, 600);
                 });
+            });
+            break;
+            
+        case 'N2-R':
+            mostrarIndicadorDigitando(() => {
+                /* Informa ao usuário que se não há desconto, não é elegível para a isenção de Imposto de Renda */
+                adicionarMensagem('bot', "Entendi. A isenção de Imposto de Renda e a restituição aplicam-se apenas a quem possui descontos ativos de IR em seus proventos.");
+                setTimeout(() => {
+                    adicionarMensagem('bot', "Como hoje você não possui descontos de Imposto de Renda, infelizmente você não se enquadra nessa isenção.");
+                    setTimeout(() => {
+                        adicionarMensagem('bot', "Mas se você conhece algum aposentado ou pensionista que ainda paga Imposto de Renda e tem ou teve doença grave, compartilhe este simulador com ela! 💙");
+                        
+                        /* Renderiza o formulário de captação de leads de outras áreas (CTA) */
+                        renderizarFormularioN2R();
+                    }, 1000);
+                }, 1000);
             });
             break;
             
@@ -1137,6 +1159,109 @@ function renderizarFormularioN1R() {
             // Armazena e envia o lead de contato de outras áreas ao CRM
             dadosLead.whatsapp = `+55${digitosApenas}`;
             enviarLeadAoCRM("outras_areas_n1r");
+            
+            // Texto parametrizado para o WhatsApp do escritório indicando interesse em outras áreas
+            const textoWhats = `Olá! Gostaria de falar com um advogado sobre outras áreas de atuação (Trabalhista, Previdenciária, Tributária ou Cível) do escritório LBM Advogados.`;
+            const linkWhats = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMERO}&text=${encodeURIComponent(textoWhats)}`;
+            
+            // Abre o WhatsApp em uma nova aba
+            window.open(linkWhats, '_blank');
+        }
+        // Fecha a sobreposição do chatbot e revela a página
+        fecharChatbotRevelarLP();
+    });
+}
+
+// Renderiza o formulário de captação de WhatsApp para outras áreas na rota N2-R (não possui descontos de IR)
+function renderizarFormularioN2R() {
+    // Limpa o painel de inputs do chatbot
+    chatState.inputPanel.innerHTML = '';
+    
+    // Adiciona mensagem informativa sobre as outras áreas de atuação do escritório
+    adicionarMensagem('bot', "Nosso escritório também atua nas áreas <strong>Trabalhista, Previdenciária, Tributária e Cível</strong>. Caso tenha dúvida sobre seus direitos em outras áreas, informe seu WhatsApp abaixo que entramos em contato.");
+
+    // Cria contêiner para o formulário de inserção do WhatsApp
+    const container = document.createElement('div');
+    container.className = 'chat-form-container';
+    
+    // Define a estrutura HTML com campo de WhatsApp formatado e botão de ação
+    container.innerHTML = `
+        <div class="chat-input-wrapper">
+            <input type="tel" class="chat-text-input" placeholder="(11) 99999-9999" id="n2r-phone" maxlength="15" required />
+            <div class="chat-input-error-msg" id="n2r-phone-error">Por favor, digite seu WhatsApp completo com DDD.</div>
+        </div>
+        <div class="chat-btn-row">
+            <button class="chat-skip-btn" id="n2r-share-btn" style="border-color:var(--cor-dourado); color:var(--cor-dourado);">Compartilhar Link</button>
+            <button class="chat-submit-btn" id="n2r-submit-btn" disabled>Entrar em Contato</button>
+        </div>
+    `;
+    
+    chatState.inputPanel.appendChild(container);
+    
+    const phoneInput = document.getElementById('n2r-phone');
+    const shareBtn = document.getElementById('n2r-share-btn');
+    const submitBtn = document.getElementById('n2r-submit-btn');
+    const errorEl = document.getElementById('n2r-phone-error');
+    
+    // Coloca foco automático no campo de digitação
+    phoneInput.focus();
+    
+    // Adiciona máscara e validação de telefone (DDD + 9 dígitos) no campo de WhatsApp
+    phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, "");
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        // Aplica a formatação do telefone: (XX) XXXXX-XXXX
+        if (value.length > 10) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+        } else if (value.length > 6) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+        } else if (value.length > 2) {
+            value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+        } else if (value.length > 0) {
+            value = `(${value}`;
+        }
+        
+        e.target.value = value;
+        
+        // Libera ou bloqueia o botão de envio baseado no tamanho do número digitado
+        const digitosApenas = e.target.value.replace(/\D/g, "");
+        const valido = digitosApenas.length === 11;
+        submitBtn.disabled = !valido;
+        
+        // Exibe mensagem de erro caso o telefone seja incompleto
+        if (digitosApenas.length > 2 && digitosApenas.length < 11) {
+            errorEl.style.display = 'block';
+        } else {
+            errorEl.style.display = 'none';
+        }
+    });
+    
+    // Configura evento de compartilhamento do simulador
+    shareBtn.addEventListener('click', () => {
+        const link = obterLinkCompartilhamento();
+        if (navigator.share) {
+            navigator.share({
+                title: 'Simulador de Isenção de IR - LBM Advogados',
+                text: 'Veja em menos de 2 minutos se você tem direito a parar de pagar IR e receber restituição retroativa.',
+                url: link
+            }).catch(err => console.log('Erro de compartilhamento:', err));
+        } else {
+            // Copia o link para a área de transferência do usuário como fallback
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link de indicação copiado com sucesso!');
+            });
+        }
+        enviarGTM('n2r_compartilhado');
+    });
+    
+    // Configura evento de envio do número de WhatsApp e redirecionamento de atendimento
+    submitBtn.addEventListener('click', () => {
+        const digitosApenas = phoneInput.value.replace(/\D/g, "");
+        if (digitosApenas.length === 11) {
+            // Armazena e envia o lead de contato de outras áreas ao CRM
+            dadosLead.whatsapp = `+55${digitosApenas}`;
+            enviarLeadAoCRM("outras_areas_n2r");
             
             // Texto parametrizado para o WhatsApp do escritório indicando interesse em outras áreas
             const textoWhats = `Olá! Gostaria de falar com um advogado sobre outras áreas de atuação (Trabalhista, Previdenciária, Tributária ou Cível) do escritório LBM Advogados.`;
