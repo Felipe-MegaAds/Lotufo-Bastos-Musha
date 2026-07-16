@@ -207,13 +207,17 @@ function atualizarProgresso(no) {
     }
 }
 
-// Limpa o painel de input e renderiza o indicador de digitação da "Ana"
+// Limpa o painel de input e renderiza o indicador de digitação da "Ana" com seu avatar
 function mostrarIndicadorDigitando(callback) {
     chatState.inputPanel.innerHTML = '';
     
     const row = document.createElement('div');
     row.className = 'chat-message-row bot typing-indicator-row';
+    // Insere o avatar da atendente Ana ao lado do indicador de digitação
     row.innerHTML = `
+        <div class="chat-message-avatar">
+            <img src="Assets/atendente.png" alt="Ana" class="chat-message-avatar-img" />
+        </div>
         <div class="typing-indicator-bubble">
             <div class="typing-dot"></div>
             <div class="typing-dot"></div>
@@ -234,11 +238,23 @@ function mostrarIndicadorDigitando(callback) {
     }, 1200);
 }
 
-// Adiciona uma mensagem de texto no histórico do chat
+// Adiciona uma mensagem de texto no histórico do chat (incluindo o avatar se for bot)
 function adicionarMensagem(autor, texto) {
     const row = document.createElement('div');
     row.className = `chat-message-row ${autor}`;
-    row.innerHTML = `<div class="chat-bubble">${texto}</div>`;
+    
+    // Se a mensagem for do chatbot (bot), exibe a foto de perfil da atendente Ana ao lado
+    if (autor === 'bot') {
+        row.innerHTML = `
+            <div class="chat-message-avatar">
+                <img src="Assets/atendente.png" alt="Ana" class="chat-message-avatar-img" />
+            </div>
+            <div class="chat-bubble">${texto}</div>
+        `;
+    } else {
+        row.innerHTML = `<div class="chat-bubble">${texto}</div>`;
+    }
+    
     chatState.messagesContainer.appendChild(row);
     chatState.messagesContainer.scrollTop = chatState.messagesContainer.scrollHeight;
 }
@@ -1298,8 +1314,8 @@ function renderizarTelaFinalDeSucesso() {
         <p class="chat-final-text">${texto}</p>
     `;
     
-    // Se não for um lead não elegível, exibe a estimativa financeira na tela
-    if (dadosLead.lead_score !== 'frio' && dadosLead.faixa_renda !== '') {
+    // Se a renda foi informada, exibe a estimativa financeira na tela final (independentemente do lead score comercial)
+    if (dadosLead.faixa_renda !== '') {
         const resumoFinanceiro = calcularEstimativaFinanceira();
         html += `
             <div class="chat-summary-box">

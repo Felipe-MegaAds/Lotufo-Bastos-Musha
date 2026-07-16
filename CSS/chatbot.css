@@ -198,13 +198,38 @@
     }
 }
 
-/* Alinhamentos das mensagens (Esquerda = Bot, Direita = Lead) */
+/* Alinhamentos das mensagens (Esquerda = Bot, Direita = Lead) e estilo de layout para o bot */
 .chat-message-row.bot {
     justify-content: flex-start;
+    display: flex; /* Define layout flexível para agrupar o avatar e a bolha */
+    align-items: flex-end; /* Alinha o avatar na base do balão de mensagem */
+    gap: 10px; /* Distância de 10px entre o avatar e o balão */
 }
 
+/* Alinhamento para mensagens do usuário */
 .chat-message-row.user {
     justify-content: flex-end;
+}
+
+/* Avatar da atendente posicionado ao lado das bolhas de mensagens do bot */
+.chat-message-avatar {
+    width: 35px; /* Largura fixa do círculo do avatar */
+    height: 35px; /* Altura fixa do círculo do avatar */
+    border-radius: 50%; /* Garante formato circular */
+    overflow: hidden; /* Corta o excesso da imagem */
+    flex-shrink: 0; /* Impede o avatar de ser espremido em telas estreitas */
+    border: 1.5px solid var(--cor-dourado, #CCA650); /* Borda decorativa dourada */
+    background-color: var(--cor-azul-escuro, #1F2A39); /* Fundo padrão escuro */
+    display: flex; /* Layout flexível centralizado */
+    align-items: center; /* Alinhamento vertical centralizado */
+    justify-content: center; /* Alinhamento horizontal centralizado */
+}
+
+/* Ajuste da imagem para cobrir toda a área circular */
+.chat-message-avatar-img {
+    width: 100%; /* Largura total do elemento pai */
+    height: 100%; /* Altura total do elemento pai */
+    object-fit: cover; /* Ajusta a proporção da imagem */
 }
 
 /* Corpo do Balão */
